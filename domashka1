@@ -1,0 +1,61 @@
+//Квадратное уравнение
+
+import Foundation
+
+var a = 3.0
+var b = 12.0
+var c = 4.0
+var x1 = 0.0
+var x2 = 0.0
+
+var D = pow(b,2)-4*a*c
+if (D<0)
+{
+    print ("Корней нет")
+}
+if (D==0)
+{
+    x1 = (-b+sqrt(D))/(2*a)
+}
+if (D>0)
+{
+    x1 = (-b+sqrt(D))/(2*a)
+    x2 = (-b-sqrt(D))/(2*a)
+}
+
+print(x1)
+print(x2)
+
+
+//Катеты прямоугольного треугольника найти площадь и гипотенузу
+
+import Foundation
+
+var a = 1.0
+var b = 3.0
+var p = 0.0
+var s = 0.0
+var c = 0.0
+s = ((a*b)/2)
+c = sqrt(pow(a,2) + pow(b,2))
+p = a + b + c
+
+print("Площадь треуголника равна \(s)")
+print("Гипотенуза треугольника равна \(c)")
+print("Периметр треугольника равен \(p)")
+
+
+//Даны сумма вклада и  годовой процент найти сумму через 5 лет
+
+var d = 115000.0
+var p = 7.6
+p = p * 0.01
+var year1 = d + (d * p)
+var year2 = year1 + (year1 * p)
+var year3 = year2 + (year2 * p)
+var year4 = year3 + (year3 * p)
+var year5 = year4 + (year4 * p)
+var cash = year5
+
+    print("Чрезе 5 лет сумма вклада будет равна \(cash)")
+
