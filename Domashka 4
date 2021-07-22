@@ -32,25 +32,28 @@ class SportCar: Car{
     var maxSpeed: Int
     init(maxSpeed: Int, brand: String, boost: boostState, trunk: trunkState) {
         self.maxSpeed = maxSpeed
-        super.init(brand: brand,  boostState: boostState, trunkState: trunkState)
+        super.init(brand: brand,  boost: boost, trunk: trunk)
         
-    }
-    
-    override func boostOn() {
-    super.boostOn()
-    print("Приготовьтесь, надув включен")
     }
 }
 
 class Truck: Car{
-var heigtCabin: Double
+var heigtCabin: Int
     
-init(heigtCabin: Double, brand: String, boost: boostState, trunk: trunkState){
+init(heigtCabin: Int, brand: String, boost: boostState, trunk: trunkState){
 self.heigtCabin = heigtCabin
-        super.init(brand: brand,  boostState: boostState, trunkState: trunkState)
+        super.init(brand: brand,  boost: boost, trunk: trunk)
 }
 }
-var car1 = SportCar(maxSpeed: 300, brand: "Audi", boost: .on, trunk: .full)
+var car1 = SportCar(maxSpeed: 300, brand: "Audi", boost: .on, trunk: .empty)
 print(car1.brand)
 print(car1.boost)
+print(car1.maxSpeed)
 print(car1.trunk)
+
+var truk1 = Truck(heigtCabin: 280, brand: "volvo", boost: .off, trunk: .full)
+
+print(truk1.brand)
+print(truk1.boost)
+print(truk1.trunk)
+print(truk1.heigtCabin)
