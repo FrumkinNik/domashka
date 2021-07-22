@@ -1,0 +1,56 @@
+import Foundation
+
+//enum boostState придуман заново, так как в прошлом задании не было подходящего для класса sportcar
+enum boostState{
+    case on, off
+}
+
+enum trunkState{
+    case full, empty
+}
+class Car {
+    var brand: String
+    var boost: boostState
+    var trunk: trunkState
+    
+    init(brand: String, boost: boostState, trunk: trunkState) {
+        self.brand = brand
+        self.boost = boost
+        self.trunk = trunk
+    }
+    
+    func boostOn() {
+        boost = .on
+        print("Boost on")
+    }
+    func boostOff(){
+        boost = .off
+    }
+}
+
+class SportCar: Car{
+    var maxSpeed: Int
+    init(maxSpeed: Int, brand: String, boost: boostState, trunk: trunkState) {
+        self.maxSpeed = maxSpeed
+        super.init(brand: brand,  boostState: boostState, trunkState: trunkState)
+        
+    }
+    
+    override func boostOn() {
+    super.boostOn()
+    print("Приготовьтесь, надув включен")
+    }
+}
+
+class Truck: Car{
+var heigtCabin: Double
+    
+init(heigtCabin: Double, brand: String, boost: boostState, trunk: trunkState){
+self.heigtCabin = heigtCabin
+        super.init(brand: brand,  boostState: boostState, trunkState: trunkState)
+}
+}
+var car1 = SportCar(maxSpeed: 300, brand: "Audi", boost: .on, trunk: .full)
+print(car1.brand)
+print(car1.boost)
+print(car1.trunk)
