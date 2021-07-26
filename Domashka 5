@@ -1,0 +1,63 @@
+
+import Foundation
+
+enum windows{
+    case open
+    case closed
+}
+enum engine{
+    case on
+    case off
+}
+enum boost{
+    case boostOn
+    case boostOff
+}
+enum trunk{
+    case trunkFull
+    case TrunkEmpty
+}
+protocol Car {
+    var brand: String {get}
+    var release: Int {get}
+    var engineState: engine {get set}
+    var windowsState: windows {get set}
+}
+extension Car {
+    mutating func changeEngineState(engineState: engine){
+        self.engineState = engineState
+    }
+    mutating func chageWindowsState(windowsState: windows){
+        self.windowsState = windowsState
+    }
+}
+class basicCar: Car{
+    var brand: String
+    var release: Int
+    var engineState: engine = .off
+    var windowsState: windows = .closed
+    init(brand: String, release: Int) {
+        self.brand = brand
+        self.release = release
+    }
+}
+class sportCar: basicCar, CustomStringConvertible{
+    var boostState: boost = .boostOff
+    var description: String{
+        return "двигатель \(engineState), окна \(windowsState), турбонадув \(boostState), год выпуска \(release)"
+    }
+}
+class trunkCar: basicCar, CustomStringConvertible{
+    var trunkState: trunk = .TrunkEmpty
+    var description: String{
+        return "двигатель \(engineState), окна \(windowsState), багажник \(trunkState), год выпуска \(release)"
+    }
+}
+var audi = sportCar(brand: "audi", release: 2010)
+var volvo = trunkCar(brand: "volvo", release: 2020)
+audi.changeEngineState(engineState: .on)
+audi.boostState = .boostOn
+volvo.chageWindowsState(windowsState: .open)
+volvo.trunkState = .trunkFull
+print(audi.description)
+print(volvo.description)
