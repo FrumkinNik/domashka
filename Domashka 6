@@ -1,0 +1,47 @@
+import Foundation
+
+struct hoho<Element: Comparable>{
+    var loots = [Element]()
+    
+    mutating func add (_ loot: Element) {
+        loots.append(loot)
+    }
+    mutating func next()-> Element {
+        print("next \(loots.first!)")
+        return loots.removeFirst()
+    }
+    func filter(loot: Element){
+        print("find \(loots.filter{$0 == loot})")
+    }
+    mutating func props() -> [Element] {
+        return loots.sorted(by: >)
+    }
+    subscript (index: Int) -> Element? {
+        return (index < loots.count ? loots[index] : nil)
+    }
+    
+    func printCount() {
+        print(loots.count)
+    }
+    
+}
+
+
+var react = hoho<String>(loots: ["Lol"])
+react.add("Lmao")
+react.add("Nice")
+react.add("Bad")
+
+print(react.loots)
+print("sorted: \(react.props())")
+
+react.next()
+react.next()
+react.add("Sad")
+print(react)
+react.filter(loot: "Bad")
+react.printCount()
+
+print(react)
+print(react[1])
+print(react[3])
