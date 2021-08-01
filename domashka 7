@@ -13,30 +13,30 @@ struct vegetable {
 
 class vegetables {
     var inventory = [
-        "apple": vegetable(price:10, amount:5),
+        "apple": vegetable(price:10, amount:15),
         "tomato" :vegetable(price:15, amount:12),
         "cucamber": vegetable(price:20, amount:20),
         "cherry": vegetable(price:25, amount:10)
     ]
 
 
-var vegetablesAmount = 0
+var vegetablesPrice = 0
 
 func errors(vegetableName name:String) throws {
     guard let vegies = inventory[name] else {
         throw buyVegetableError.wrongType
     }
     guard vegies.amount > 0 else {
-        throw buyVegetableError.wrongType
+        throw buyVegetableError.noEnough
     }
-    guard vegies.amount <= vegetablesAmount else {
-        throw buyVegetableError.noCash(CashNeed: vegies.amount - vegetablesAmount)
+    guard vegies.price <= vegetablesPrice else {
+        throw buyVegetableError.noCash(CashNeed: vegies.price - vegetablesPrice)
     }
     
-    vegetablesAmount -= vegies.amount
+    vegetablesPrice -= vegies.price
     
     var someVegies = vegies
-    someVegies.amount -= 1
+    someVegies.price -= 1
     inventory[name] = someVegies
     
     print("\(name) купил овощ")
@@ -55,7 +55,7 @@ func wantToBuy(buyer: String, Vegetables: vegetables) throws {
 }
 
 var buyer = vegetables()
-buyer.vegetablesAmount = 13
+buyer.vegetablesPrice = 11
 
 do {
     try wantToBuy(buyer: "Nikita", Vegetables: buyer)
