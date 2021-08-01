@@ -39,7 +39,7 @@ func errors(vegetableName name:String) throws {
     someVegies.price -= 1
     inventory[name] = someVegies
     
-    print("\(name) купил овощ")
+    print("Он купил \(name)")
 }
 }
 
@@ -55,10 +55,10 @@ func wantToBuy(buyer: String, Vegetables: vegetables) throws {
 }
 
 var buyer = vegetables()
-buyer.vegetablesPrice = 11
+buyer.vegetablesPrice = 20
 
 do {
-    try wantToBuy(buyer: "Nikita", Vegetables: buyer)
+    try wantToBuy(buyer: "Oleg", Vegetables: buyer)
 } catch buyVegetableError.noCash {
     print ("не хватает денег")
 } catch buyVegetableError.noEnough {
