@@ -1,0 +1,68 @@
+import Foundation
+
+enum buyVegetableError: Error {
+    case noCash(CashNeed: Int)
+    case wrongType
+    case noEnough
+}
+
+struct vegetable {
+    var price: Int
+    var amount: Int
+}
+
+class vegetables {
+    var inventory = [
+        "apple": vegetable(price:10, amount:5),
+        "tomato" :vegetable(price:15, amount:12),
+        "cucamber": vegetable(price:20, amount:20),
+        "cherry": vegetable(price:25, amount:10)
+    ]
+
+
+var vegetablesAmount = 0
+
+func errors(vegetableName name:String) throws {
+    guard let vegies = inventory[name] else {
+        throw buyVegetableError.wrongType
+    }
+    guard vegies.amount > 0 else {
+        throw buyVegetableError.wrongType
+    }
+    guard vegies.amount <= vegetablesAmount else {
+        throw buyVegetableError.noCash(CashNeed: vegies.amount - vegetablesAmount)
+    }
+    
+    vegetablesAmount -= vegies.amount
+    
+    var someVegies = vegies
+    someVegies.amount -= 1
+    inventory[name] = someVegies
+    
+    print("\(name) купил овощ")
+}
+}
+
+let favoriteVegie = [
+    "Nikita": "apple",
+    "Oleg": "tomato",
+    "Denis": "cucamber"
+]
+
+func wantToBuy(buyer: String, Vegetables: vegetables) throws {
+    let buyerName = favoriteVegie[buyer] ?? "cherry"
+    try Vegetables.errors(vegetableName: buyerName)
+}
+
+var buyer = vegetables()
+buyer.vegetablesAmount = 13
+
+do {
+    try wantToBuy(buyer: "Nikita", Vegetables: buyer)
+} catch buyVegetableError.noCash {
+    print ("не хватает денег")
+} catch buyVegetableError.noEnough {
+    print("нет в наличии")
+} catch buyVegetableError.wrongType {
+    print("нет в продаже")
+}
